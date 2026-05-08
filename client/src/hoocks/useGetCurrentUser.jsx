@@ -10,7 +10,8 @@ export const useGetCurrentUser = () => {
     useEffect(() => {
         const GetCurrentUser = async () => {
             try {
-                const result = await axios.get('http://localhost:8080/api/user/me', {withCredentials: true});
+                const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+                const result = await axios.get(`${API_URL}/api/user/me`, {withCredentials: true});
                 dispatch(setUserData(result.data))
             } catch (error) {
                 console.log("ERROR: ", error)

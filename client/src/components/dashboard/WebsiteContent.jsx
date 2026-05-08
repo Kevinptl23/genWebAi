@@ -19,7 +19,7 @@ export const WebsiteContent = () => {
     const fetchWebsites = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8080/api/website/get-all",
+          `${import.meta.env.VITE_API_URL || "http://localhost:8080"}/api/website/get-all`,
           { withCredentials: true },
         );
         setWebsites(res.data || []);

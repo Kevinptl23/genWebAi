@@ -33,8 +33,9 @@ export const useWebsiteGenerator = (navigate) => {
     startProgress();
 
     try {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
       const res = await axios.post(
-        "http://localhost:8080/api/website/generate",
+        `${API_URL}/api/website/generate`,
         { userPrompt: prompt },
         { withCredentials: true }
       );

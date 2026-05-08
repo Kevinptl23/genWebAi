@@ -25,7 +25,8 @@ const Home = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:8080/api/auth/logout", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+      await axios.get(`${API_URL}/api/auth/logout`, {
         withCredentials: true,
       });
       dispatch(setUserData(null));

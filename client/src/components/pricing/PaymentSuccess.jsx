@@ -8,7 +8,8 @@ const PaymentSuccess = () => {
 
   useEffect(() => {
     const updateCredits = async () => {
-      await axios.post("http://localhost:8080/api/user/add-credits", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+      await axios.post(`${API_URL}/api/user/add-credits`, {
         credits,
       });
     };

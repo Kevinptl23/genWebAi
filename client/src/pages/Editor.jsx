@@ -29,8 +29,9 @@ export const Editor = () => {
     }));
 
     try {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
       const result = await axios.post(
-        `http://localhost:8080/api/website/update/${id}`,
+        `${API_URL}/api/website/update/${id}`,
         { prompt },
         { withCredentials: true },
       );
@@ -87,7 +88,8 @@ export const Editor = () => {
 
   const handleDeploy = async () => {
     try {
-      const res = await axios.post("http://localhost:8080/api/deploy", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
+      const res = await axios.post(`${API_URL}/api/deploy`, {
         websiteId: id,
       });
 
@@ -102,8 +104,9 @@ export const Editor = () => {
   useEffect(() => {
     const fetchWebsite = async () => {
       try {
+        const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
         const res = await axios.get(
-          `http://localhost:8080/api/website/get-by-id/${id}`,
+          `${API_URL}/api/website/get-by-id/${id}`,
           { withCredentials: true },
         );
 
