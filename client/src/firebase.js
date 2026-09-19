@@ -14,7 +14,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 //   appId: "1:103427056615:web:234117133a554948dd5342"
 // };
 const firebaseConfig = {
-  apiKey: "AIzaSyAkczEVB13kkAq_pUEO8e5A6LEuNI3iABU",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "genwebai-1554d.firebaseapp.com",
   projectId: "genwebai-1554d",
   storageBucket: "genwebai-1554d.firebasestorage.app",
