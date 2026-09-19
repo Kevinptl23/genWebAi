@@ -17,7 +17,8 @@ const CreateWebsitePage = () => {
   } = useWebsiteGenerator(navigate);
 
   return (
-    <div className="min-h-screen bg-black flex flex-col justify-center">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col justify-center relative overflow-hidden font-sans">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-indigo-200/30 blur-[140px] pointer-events-none -z-10" />
       <HeroSection />
 
       <PromptInput

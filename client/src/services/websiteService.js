@@ -4,9 +4,9 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080";
 
 export const getUserWebsites = async () => {
   const res = await axios.get(
-    `${API_URL}/api/website/user`,
+    `${API_URL}/api/website/get-all`,
     { withCredentials: true }
   );
 
-  return res.data.websites;
+  return res.data;
 };

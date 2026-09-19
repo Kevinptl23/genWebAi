@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import slugify from "slugify";
 
 const messageSchema = new mongoose.Schema(
   {
@@ -56,16 +57,15 @@ const websiteSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Website = mongoose.model("Website", websiteSchema);
-
-websiteSchema.pre("save", function (next) {
+websiteSchema.pre("save", function () {
   if (!this.slug) {
     this.slug =
-      slugify(this.name, { lower: true, strict: true }) +
+      slugify(this.title || "website", { lower: true, strict: true }) +
       "-" +
       Date.now();
   }
-  next();
 });
+
+const Website = mongoose.model("Website", websiteSchema);
 
 export default Website;

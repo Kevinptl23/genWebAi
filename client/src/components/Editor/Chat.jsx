@@ -1,54 +1,40 @@
 import { Send } from "lucide-react";
 
 function Chat({ website, setPrompt, handleUpdate, prompt, creditError }) {
-  console.log("website: ", website);
   return (
     <>
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
-        {website.conversation
-          ?.reduce((acc, msg, index, arr) => {
-            if (msg.role === "user") {
-              acc.push(msg);
-
-              const next = arr[index - 1];
-              if (next && next.role === "ai") {
-                acc.push(next);
-              }
-            }
-
-            return acc;
-          }, [])
-          .map((m, i) => (
+      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-slate-50/50">
+        {website?.conversation?.map((m, i) => (
+          <div
+            key={i}
+            className={`max-w-[85%] ${
+              m.role === "user" ? "ml-auto" : "mr-auto"
+            }`}
+          >
             <div
-              key={i}
-              className={`max-w-[85%] ${
-                m.role === "user" ? "ml-auto" : "mr-auto"
+              className={`px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-xs ${
+                m.role === "user"
+                  ? "bg-linear-to-r from-indigo-600 to-violet-600 text-white rounded-br-xs font-medium"
+                  : "bg-white border border-slate-200/90 text-slate-800 rounded-bl-xs"
               }`}
             >
-              <div
-                className={`px-4 py-2.5 rounded-sm leading-relaxed ${
-                  m.role === "user"
-                    ? "bg-white text-black"
-                    : "bg-white/5 border border-white/10 text-zinc-200"
-                }`}
-              >
-                {m.content === "typing" ? (
-                  <div className="flex gap-1">
-                    <span className="animate-bounce">.</span>
-                    <span className="animate-bounce delay-100">.</span>
-                    <span className="animate-bounce delay-200">.</span>
-                  </div>
-                ) : (
-                  m.content
-                )}
-              </div>
+              {m.content === "typing" ? (
+                <div className="flex gap-1 py-1">
+                  <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce"></span>
+                  <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce [animation-delay:0.2s]"></span>
+                  <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce [animation-delay:0.4s]"></span>
+                </div>
+              ) : (
+                m.content
+              )}
             </div>
-          ))}
+          </div>
+        ))}
       </div>
 
-      <div className="p-3 border-t border-white/10">
+      <div className="p-3.5 border-t border-slate-200 bg-white">
         {creditError && (
-          <div className="mx-3 mb-2 p-3 text-sm rounded-lg bg-red-500/10 border border-red-500/30 text-red-400">
+          <div className="mb-3 p-3 text-xs rounded-xl bg-rose-50 border border-rose-200 text-rose-600 font-medium">
             {creditError}
           </div>
         )}
@@ -56,16 +42,17 @@ function Chat({ website, setPrompt, handleUpdate, prompt, creditError }) {
           <input
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className="flex-1 rounded-2xl px-4 py-3 bg-white/5 border border-white/10"
-            placeholder="Describe changes..."
+            onKeyDown={(e) => e.key === 'Enter' && handleUpdate()}
+            className="flex-1 rounded-2xl px-4 py-3 bg-slate-100 border border-slate-200/80 text-slate-900 text-sm placeholder-slate-400 outline-none focus:border-indigo-500 focus:bg-white transition"
+            placeholder="Describe website changes..."
           />
 
           <button
-            className="px-4 py-3 rounded-2xl bg-white text-black"
+            className="px-4 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-xs hover:shadow-md transition cursor-pointer flex items-center justify-center disabled:opacity-50"
             onClick={handleUpdate}
-            disabled={creditError}
+            disabled={creditError || !prompt.trim()}
           >
-            <Send size={14} />
+            <Send size={15} />
           </button>
         </div>
       </div>

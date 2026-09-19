@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { setUserData } from '../redux/userSlice.js';
@@ -19,7 +18,7 @@ export const useGetCurrentUser = () => {
         }
 
         GetCurrentUser();
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>useGetCurrentUser</div>

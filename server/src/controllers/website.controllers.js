@@ -162,7 +162,7 @@ export const generateWebsite = async (req, res) => {
       });
     }
 
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user._id || req.user.id);
 
     if (!user) {
       return res.status(400).json({
@@ -354,11 +354,11 @@ export const changes = async (req, res) => {
     }
 
     website.conversation.push(
+      { role: "user", content: prompt },
       {
         role: "ai",
         content: parsed.message,
       },
-      { role: "user", content: prompt },
     );
 
     website.latestCode = parsed.code;

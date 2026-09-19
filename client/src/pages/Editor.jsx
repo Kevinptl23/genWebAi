@@ -153,8 +153,8 @@ export const Editor = () => {
     );
 
   return (
-    <div className="h-screen w-screen flex flex-col md:flex-row bg-black text-white overflow-hidden">
-      <aside className="hidden lg:flex w-[380px] flex-col border-r border-white/10 bg-black/80">
+    <div className="h-screen w-screen flex flex-col md:flex-row bg-slate-100 text-slate-900 overflow-hidden font-sans">
+      <aside className="hidden lg:flex w-[380px] flex-col border-r border-slate-200 bg-white shadow-xs">
         <Header website={website} />
         <Chat
           website={website}
@@ -165,24 +165,40 @@ export const Editor = () => {
         />
       </aside>
 
-      <div className="flex-1 flex flex-col">
-        <div className="h-14 px-4 flex justify-between items-center border-b border-white/10 bg-black/80">
-          <span className="text-xs text-zinc-400">Live Preview</span>
+      <div className="flex-1 flex flex-col min-w-0">
+        <div className="h-14 px-5 flex justify-between items-center border-b border-slate-200 bg-white">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="text-xs font-semibold text-slate-600">Live Preview</span>
+          </div>
 
-          <div className="flex gap-4">
+          <div className="flex items-center gap-3">
             <button
-              className="flex items-center gap-2 px-4 py-1.5 rounded-lg bg-linear-to-r from-indigo-500 to-purple-500 text-sm font-semibold hover:scale-105 transition"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-linear-to-r from-indigo-600 to-violet-600 text-white text-xs font-bold hover:shadow-md hover:shadow-indigo-500/25 transition cursor-pointer"
               onClick={handleDeploy}
             >
-              <Rocket size={14} /> Deploy
+              <Rocket size={14} />
+              <span>Deploy</span>
             </button>
 
-            <button className="p-2" onClick={() => setShowCode(!showCode)}>
-              <Code2 size={18} />
+            <button 
+              className={`p-2 rounded-xl border transition cursor-pointer ${
+                showCode 
+                  ? "bg-indigo-50 border-indigo-200 text-indigo-600" 
+                  : "bg-slate-100 border-slate-200 text-slate-600 hover:text-slate-900"
+              }`}
+              onClick={() => setShowCode(!showCode)}
+              title="Toggle Code View"
+            >
+              <Code2 size={16} />
             </button>
 
-            <button className="p-2" onClick={openPreview}>
-              <Monitor size={18} />
+            <button 
+              className="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900 transition cursor-pointer"
+              onClick={openPreview}
+              title="Open Fullscreen Preview"
+            >
+              <Monitor size={16} />
             </button>
           </div>
         </div>
@@ -199,7 +215,7 @@ export const Editor = () => {
             }}
           />
         ) : (
-          <iframe ref={iframeRef} className="flex-1 w-full bg-white" />
+          <iframe ref={iframeRef} className="flex-1 w-full bg-white border-none" />
         )}
       </div>
     </div>

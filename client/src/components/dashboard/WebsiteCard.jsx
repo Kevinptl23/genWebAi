@@ -11,13 +11,13 @@ const WebsiteCard = ({ website }) => {
 
   return (
     <motion.div
-      whileHover={{ scale: 1.03 }}
-      transition={{ duration: 0.25 }}
-      className="bg-zinc-900 rounded-2xl overflow-hidden border border-white/10 cursor-pointer"
+      whileHover={{ y: -4, scale: 1.01 }}
+      transition={{ duration: 0.2 }}
+      className="bg-white rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-300/90 transition-all cursor-pointer flex flex-col justify-between"
       onClick={handleOpenEditor}
     >
-      {/* Preview */}
-      <div className="h-48 bg-black overflow-hidden rounded-t-2xl">
+      {/* Preview Container */}
+      <div className="h-48 bg-slate-100 overflow-hidden rounded-t-2xl border-b border-slate-100 relative">
         <iframe
           title="website-preview"
           srcDoc={website.latestCode}
@@ -28,22 +28,25 @@ const WebsiteCard = ({ website }) => {
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <p className="text-white text-sm mb-2 line-clamp-2">{website.prompt}</p>
-
-        <p className="text-zinc-400 text-xs mb-4">
-          Last updated {new Date(website.updatedAt).toLocaleDateString()}
-        </p>
+      <div className="p-5 flex-1 flex flex-col justify-between">
+        <div>
+          <h3 className="text-slate-900 font-bold text-base mb-1 line-clamp-1">
+            {website.title || "Untitled Website"}
+          </h3>
+          <p className="text-slate-500 text-xs mb-4">
+            Updated {new Date(website.updatedAt).toLocaleDateString()}
+          </p>
+        </div>
 
         <button
-          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-medium"
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white font-semibold text-sm transition-all duration-200 cursor-pointer"
           onClick={(e) => {
             e.stopPropagation();
             handleOpenEditor();
           }}
         >
-          <Rocket size={16} />
-          View in details
+          <Rocket size={15} />
+          <span>Open Editor</span>
         </button>
       </div>
     </motion.div>

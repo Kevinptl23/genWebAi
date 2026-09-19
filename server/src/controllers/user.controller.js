@@ -1,3 +1,5 @@
+import User from "../models/user.model.js";
+
 export const getUser = async (req, res) => {
   try {
     const user = req.user;
@@ -24,14 +26,19 @@ export const getUser = async (req, res) => {
 export const addCredits = async (req, res) => {
   try {
     const { credits } = req.body;
-    const userId = req.user.id;
+    const userId = req.user._id || req.user.id;
 
-    await User.findByIdAndUpdate(userId, {
-      $inc: { credits: credits },
-    });
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $inc: { credits: Number(credits) || 0 },
+      },
+      { new: true }
+    );
 
-    res.json({ success: true });
+    res.json({ success: true, credits: updatedUser?.credits });
   } catch (error) {
+    console.error("addCredits error:", error);
     res.status(500).json({ error: "Failed to update credits" });
   }
 };

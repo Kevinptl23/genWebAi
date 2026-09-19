@@ -1,20 +1,21 @@
 const GenerationLoader = ({ progress }) => {
   return (
-    <div className="max-w-4xl mx-auto mt-10 px-4">
-      <p className="text-zinc-400 mb-2">
-        Designing layout & structure...
+    <div className="max-w-4xl mx-auto mt-8 px-4 w-full">
+      <p className="text-slate-600 text-sm font-semibold mb-3 flex items-center justify-between">
+        <span>Designing layout & architecture...</span>
+        <span className="text-indigo-600 font-bold">{Math.floor(progress)}%</span>
       </p>
 
-      <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+      <div className="h-3 bg-slate-200 rounded-full overflow-hidden p-0.5 shadow-inner">
         <div
-          className="h-full bg-white transition-all"
+          className="h-full bg-linear-to-r from-indigo-600 to-violet-600 rounded-full transition-all duration-300 shadow-sm"
           style={{ width: `${progress}%` }}
         />
       </div>
 
-      <div className="flex justify-between text-xs text-zinc-500 mt-2">
-        <span>Estimated time remaining: 8–12 minutes </span> &nbsp; 
-        <span>{ Math.floor(progress)} %</span>
+      <div className="flex justify-between text-xs text-slate-500 mt-2 font-medium">
+        <span>AI processing layout & assets</span>
+        <span>Please wait...</span>
       </div>
     </div>
   );
