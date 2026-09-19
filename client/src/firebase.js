@@ -5,13 +5,22 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // Your web app's Firebase configuration
+// const firebaseConfig = {
+//   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+//   authDomain: "genwebai-49678.firebaseapp.com",
+//   projectId: "genwebai-49678",
+//   storageBucket: "genwebai-49678.firebasestorage.app",
+//   messagingSenderId: "103427056615",
+//   appId: "1:103427056615:web:234117133a554948dd5342"
+// };
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: "genwebai-49678.firebaseapp.com",
-  projectId: "genwebai-49678",
-  storageBucket: "genwebai-49678.firebasestorage.app",
-  messagingSenderId: "103427056615",
-  appId: "1:103427056615:web:234117133a554948dd5342"
+  apiKey: "AIzaSyAkczEVB13kkAq_pUEO8e5A6LEuNI3iABU",
+  authDomain: "genwebai-1554d.firebaseapp.com",
+  projectId: "genwebai-1554d",
+  storageBucket: "genwebai-1554d.firebasestorage.app",
+  messagingSenderId: "327087209991",
+  appId: "1:327087209991:web:0c9e1c8514a9a3c15ff4a2",
+  measurementId: "G-V78DDE8MB7"
 };
 
 // Initialize Firebase
